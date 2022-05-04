@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const username = "Gisela123";
+  const password = "password";
+
+  const [usernameState, setUsername] = useState('');
+  const [passwordState, setpassword] = useState('');
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  function login() {
+    if(usernameState === username && passwordState === password) {
+      setLoggedIn(true)
+    }
+  }
+  //event.target.value keeps every single character you enter on the input
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Login</h1>
+      <input type="text" onChange={(event) => {
+        setUsername(event.target.value)
+      }}/>
+      <input type="password" onChange={(event) => {
+        setpassword(event.target.value)
+      }}/>
+      <button onClick={login}>Submit</button>
+
+      {loggedIn && (
+         <h1>Logged In</h1>
+      )}
     </div>
   );
 }
